@@ -13,8 +13,17 @@
  */
 
 return [
-    'db' => [
-        'driver' => 'Pdo',
-        'dsn'    => sprintf('sqlite:%s/data/laminastutorial.db', realpath(getcwd())),
+    'db'              => [
+        'driver'         => 'Pdo',
+        'dsn'            => 'mysql:dbname=mysite;host=localhost',
+        'driver_options' => [
+            1002 => 'SET NAMES \'UTF8\'',
+        ],
     ],
+    'service_manager' => [
+        'factories' => [
+            'Laminas\Db\Adapter\Adapter'           => 'Laminas\Db\Adapter\AdapterServiceFactory',
+            'Laminas\Db\TableGateway\TableGateway' => 'Laminas\Db\TableGateway\TableGatewayServiceFactory',
+        ]
+    ]
 ];
